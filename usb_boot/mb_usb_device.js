@@ -6,7 +6,7 @@ var DEVICE_INFO = {"vendorId": MB_USB_VENDOR_ID, "productId": MB_USB_PRODUCT_ID}
 
 var mb_usb_Device;
 var usb = chrome.usb;
-var knob = document.getElementById('knob');
+var mb_usb = document.getElementById('mb_usb');
 var requestButton = document.getElementById("requestPermission");
 
 var amount = 0;
@@ -26,14 +26,14 @@ var onEvent=function(usbEvent) {
     var buffer = new Int8Array(usbEvent.data);
     amount += buffer[1] * 4;
 
-    knob.style.webkitTransform = 'rotate(' + amount + 'deg)';
+    mb_usb.style.webkitTransform = 'rotate(' + amount + 'deg)';
 
     usb.interruptTransfer( mb_usb_Device, transfer, onEvent );
   };
 
 var gotPermission = function(result) {
     requestButton.style.display = 'none';
-    knob.style.display = 'block';
+    mb_usb.style.display = 'block';
     console.log('App was granted the "usbDevices" permission.');
     usb.findDevices( DEVICE_INFO, 
       function(devices) {
