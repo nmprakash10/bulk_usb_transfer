@@ -52,6 +52,7 @@ var permissionObj = {permissions: [{'usbDevices': [DEVICE_INFO] }]};
 requestButton.addEventListener('click', function() {
   chrome.permissions.request( permissionObj, function(result) {
     if (result) {
+      console.log('App was granted the scan "usbDevices" permission.');
       gotPermission();
     } else {
       console.log('App was not granted the "usbDevices" permission.');
